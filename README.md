@@ -21,7 +21,7 @@ After controlling for country and platform, each 1-point CES increase is associa
 - **Data**: CES survey responses from the personal verification flow (Web + Mobile), joined with post-survey transfer activity at user-month level.
 - **Descriptive tests**: Kruskal-Wallis, Mann-Whitney U, chi-square for association between CES groups and behavioral outcomes.
 - **Regression**: Negative binomial model for follow-on transfer count; logistic regression for conversion. Both control for platform and registration country.
-- **Grouping**: Top-3-box (CES ≥ 5) vs bottom-box (CES ≤ 4) sharpens mobile signals, suggesting the 7-point scale may exceed the construct's natural granularity.
+- **Grouping**: Top-3-box (CES >= 5) vs bottom-box (CES < 4) sharpens mobile signals, suggesting the 7-point scale may exceed the construct's natural granularity.
 
 ## Important caveats
 
