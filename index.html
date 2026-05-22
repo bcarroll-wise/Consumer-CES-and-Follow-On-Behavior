@@ -411,7 +411,7 @@
 <!-- ============================================================ -->
 <h2>Conversion to First Transfer</h2>
 
-<p>Does a higher CES score predict whether a user makes their first transfer after verification?</p>
+<p>CES score is associated with whether the respondent makes a transfer after verification?</p>
 
 <div class="chart-container">
     <img src="Visualisations/conversion_rate_by_ces_score.png" alt="Conversion rate by CES score across platforms">
@@ -420,7 +420,7 @@
 
 <div class="insight">
     <div class="label">Insight</div>
-    <p>CES score is significantly associated with conversion on <strong>Android (p=0.0005)</strong> and <strong>iOS (p=0.0002)</strong>, but not on Web (p=0.052). The effect is modest &mdash; conversion ranges from ~50% (low CES) to ~60% (high CES) on mobile, while Web is flat at ~35-40% regardless of score.</p>
+    <p>CES score is significantly associated with conversion on <strong>Android (p=0.0005)</strong> and <strong>iOS (p=0.0002)</strong>, but not on Web (p=0.052). The effect is modest &mdash; conversion ranges from ~50% (low CES) to ~60% (high CES) on mobile.</p>
 </div>
 
 <div class="chart-container">
@@ -541,7 +541,11 @@ Tertile split:
 
 <!-- ============================================================ -->
 <h2>Regression Analysis</h2>
-
+<div class="insight">
+    <div class="label">Strongest signal</div>
+    <p>The rest of the doc is technical assessment to verify the insights above are accurate. If you're a stats nerd, read on.</p>
+    <p> If you're happy with what you've just learned, you can go ahead with your day!</p>    
+</div>
 <h3>Negative Binomial Regression: Follow-On Transfer Count</h3>
 
 <p>Predicting follow-on transfer count from CES score, controlling for platform (reference=Android) and registration country (countries with &ge;30 respondents).</p>
