@@ -15,13 +15,15 @@ After controlling for country and platform, each 1-point CES increase is associa
 | Transfer value | **No** | No meaningful relationship on mobile. Web driven by outliers. |
 | First transfer amount | **No** | Confirms CES measures friction, not user wealth/intent. |
 | Time to first transfer | **Reversed** | Lower-CES users transfer *faster* — likely a motivation bias. |
+| Scale psychometrics (IRT) | **DIF confirmed** | Mobile vs web interpret scale differently (p<0.001). 7-point scale retains more info than 3-level collapse. |
 
 ## Method
 
 - **Data**: CES survey responses from the personal verification flow (Web + Mobile), joined with post-survey transfer activity at user-month level.
 - **Descriptive tests**: Kruskal-Wallis, Mann-Whitney U, chi-square for association between CES groups and behavioral outcomes.
 - **Regression**: Negative binomial model for follow-on transfer count; logistic regression for conversion. Both control for platform and registration country.
-- **Grouping**: Top-3-box (CES >= 5) vs bottom-box (CES < 4) sharpens mobile signals, suggesting the 7-point scale may exceed the construct's natural granularity.
+- **IRT analysis**: Graded Response Model (GRM) fitted per platform to assess scale discrimination and threshold spacing. Differential Item Functioning (DIF) tested via likelihood ratio comparing mobile vs web. Ordinal logit and AIC comparison of 7-level vs collapsed 3-level scale.
+- **Grouping**: Top-3-box (CES >= 5) vs bottom-box (CES < 4) sharpens mobile signals, but IRT confirms the 7-point scale retains useful information (lower AIC than 3-level collapse).
 
 ## Important caveats
 

@@ -531,6 +531,48 @@ CES_SCORE p-value: &lt; 0.0001
 </div>
 
 <!-- ============================================================ -->
+<h2>Scale Psychometrics (IRT Analysis)</h2>
+
+<p>Item Response Theory (Graded Response Model) applied to the CES 7-point scale to assess how well each scale point differentiates between users with different levels of verification friction.</p>
+
+<div class="chart-container">
+    <img src="Visualisations/irt_category_response_and_information_curves.png" alt="IRT Category Response Curves and Test Information Curves by platform">
+    <div class="caption">Top row: Category Response Curves showing the probability of each CES response at each latent trait level. Bottom row: Test Information Curves showing measurement precision across the latent friction spectrum.</div>
+</div>
+
+<div class="insight">
+    <div class="label">How to interpret</div>
+    <p><strong>Category Response Curves:</strong> Each coloured line represents one CES option (1&ndash;7). The x-axis (&theta;) is latent verification ease (left = high friction, right = low friction). A well-functioning scale point has a clear peak where it's the most likely response. Overlapping or flat curves indicate categories that don't differentiate well.</p>
+    <p><strong>Test Information Curves:</strong> Higher information = more measurement precision. A broad curve means the scale measures well across a wide range of users. The peak location shows WHERE on the friction spectrum CES is most useful.</p>
+</div>
+
+<div class="insight">
+    <div class="label">Findings</div>
+    <p><strong>Discrimination is moderate and consistent</strong> (~1.26 across platforms). All seven scale points produce distinct response curves &mdash; each has a region where it's the most probable response.</p>
+    <p><strong>Threshold gaps are narrower at the low end</strong> (b1&ndash;b2: ~0.30&ndash;0.36) than the high end (~0.66&ndash;0.79), meaning the scale differentiates less well among very dissatisfied users. This makes sense: users who score 1, 2, or 3 are all simply "unhappy" without much meaningful distinction between them.</p>
+</div>
+
+<h3>Differential Item Functioning: Mobile vs Web</h3>
+
+<div class="chart-container">
+    <img src="Visualisations/dif_threshold_comparison_mobile_vs_web.png" alt="DIF threshold comparison between mobile and web platforms">
+    <div class="caption">Category threshold locations on the latent scale for mobile (green) vs web (dark green). Connected dots show how the same threshold shifts between platforms.</div>
+</div>
+
+<div class="insight">
+    <div class="label">DIF result</div>
+    <p><strong>Significant DIF detected</strong> (&chi;&sup2;(7) = 556, p &lt; 0.001): mobile and web users interpret the CES scale differently. Mobile thresholds are shifted lower on the latent scale, meaning mobile users give higher CES scores for equivalent levels of latent friction. This confirms that raw CES scores are not directly comparable across platforms without adjustment.</p>
+</div>
+
+<h3>7-Level vs 3-Level Scale Comparison</h3>
+
+<div class="insight">
+    <div class="label">Model comparison</div>
+    <p>Collapsing to 3 levels (Low 1&ndash;3 / Mid 4&ndash;5 / High 6&ndash;7) produces interpretable effects &mdash; High CES users make <strong>42% more transfers</strong> than Low (rate ratio=1.42, p&lt;0.0001) &mdash; but the 7-level model has <strong>lower AIC</strong> (44,124 vs 44,200), meaning the full scale retains useful predictive information.</p>
+    <p>The ordinal logit also confirms mobile users are significantly more likely to fall into higher CES categories (coef=0.40, p&lt;0.001), consistent with the DIF finding.</p>
+</div>
+
+<!-- ============================================================ -->
 <h2>Important Caveats</h2>
 
 <ol>
