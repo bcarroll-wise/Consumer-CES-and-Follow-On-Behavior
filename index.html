@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumer CES & Follow-On Behavior</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #163300;
+            --color-secondary: #9FE870;
+            --color-accent: #FFEB69;
+            --color-text-primary: #0E0F0C;
+            --color-text-secondary: #454745;
+            --color-text-tertiary: #6A6C6A;
+            --color-background: #FFFFFF;
+            --color-background-neutral: #F5F5F5;
+            --color-border: #E8E8E8;
+            --color-success: #2F5711;
+            --color-error: #A8200D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--color-text-primary);
+            background: var(--color-background);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        .header {
+            background: var(--color-primary);
+            padding: 80px 0 64px;
+        }
+
+        .header .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .header h1 {
+            color: var(--color-secondary);
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .header .subtitle {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .header .meta {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.9rem;
+            margin-top: 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        main {
+            padding: 64px 0 96px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 64px;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-top: 40px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* Key findings box */
+        .findings-box {
+            background: var(--color-background-neutral);
+            border-left: 4px solid var(--color-secondary);
+            border-radius: 0 12px 12px 0;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .findings-box h3 {
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+
+        .findings-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .findings-box li {
+            margin-bottom: 8px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Stat banner */
+        .stat-banner {
+            display: flex;
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .stat-banner .stat {
+            flex: 1;
+            background: var(--color-background-neutral);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-banner .stat.primary {
+            background: var(--color-primary);
+        }
+
+        .stat-banner .stat.primary .value {
+            color: var(--color-secondary);
+        }
+
+        .stat-banner .stat.primary .label {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .stat-banner .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-banner .label {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Charts */
+        .chart-container {
+            margin: 32px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .chart-container img {
+            width: 100%;
+            display: block;
+        }
+
+        .chart-container .caption {
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            background: var(--color-background-neutral);
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* Insight boxes */
+        .insight {
+            background: var(--color-background-neutral);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 24px 0;
+            border-left: 4px solid var(--color-secondary);
+        }
+
+        .insight p {
+            margin-bottom: 8px;
+        }
+
+        .insight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .insight .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-success);
+            margin-bottom: 8px;
+        }
+
+        .caveat {
+            border-left-color: var(--color-accent);
+        }
+
+        .caveat .label {
+            color: #8B6914;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.95rem;
+        }
+
+        thead th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--color-primary);
+            color: var(--color-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        thead th:first-child { border-radius: 8px 0 0 0; }
+        thead th:last-child { border-radius: 0 8px 0 0; }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        .sig-yes { color: var(--color-success); font-weight: 600; }
+        .sig-no { color: var(--color-text-tertiary); }
+        .sig-rev { color: var(--color-error); font-weight: 500; }
+
+        /* Code/model output */
+        .model-output {
+            background: var(--color-background-neutral);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            color: var(--color-text-secondary);
+        }
+
+        .model-output .key {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        /* Section dividers */
+        .section-divider {
+            background: var(--color-accent);
+            border-radius: 12px;
+            padding: 48px 40px;
+            margin: 64px 0 32px;
+            text-align: center;
+        }
+
+        .section-divider h2 {
+            margin: 0;
+            color: var(--color-primary);
+            font-size: 1.6rem;
+        }
+
+        .section-divider p {
+            color: var(--color-text-secondary);
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+        /* Lists */
+        ul, ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 2rem; }
+            .stat-banner { flex-direction: column; }
+            .container { padding: 0 20px; }
+            main { padding: 40px 0 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <h1>Consumer CES & Follow-On Behavior</h1>
+        <p class="subtitle">Does verification experience predict downstream transfer activity?</p>
+        <p class="meta">Global KYC & Onboarding &middot; Personal Verification &middot; Bryan Carroll &middot; May 2026</p>
+    </div>
+</div>
+
+<main>
+<div class="container">
+
+<h2>Summary of Findings</h2>
+
+<div class="stat-banner">
+    <div class="stat primary">
+        <div class="value">+7.9%</div>
+        <div class="label">More follow-on transfers per CES point</div>
+    </div>
+    <div class="stat">
+        <div class="value">p &lt; 0.0001</div>
+        <div class="label">Negative binomial regression</div>
+    </div>
+    <div class="stat">
+        <div class="value">All platforms</div>
+        <div class="label">Consistent signal</div>
+    </div>
+</div>
+
+<p><strong>Key finding:</strong> CES score from the personal verification flow is a statistically significant predictor of follow-on transfer frequency across all platforms. After controlling for country and platform, each 1-point CES increase is associated with <span class="highlight">7.9% more follow-on transfers</span> (negative binomial regression, p&lt;0.0001).</p>
+
+<div class="findings-box">
+    <h3>What CES predicts well:</h3>
+    <ul>
+        <li><strong>Follow-on transfer count</strong> &mdash; significant across all platforms (Kruskal-Wallis: Android p=0.002, iOS p=0.008, Web p&lt;0.0001). Top-3-box users make more repeat transfers than bottom-box users.</li>
+        <li><strong>Conversion to first transfer (mobile only)</strong> &mdash; Android (p=0.0005) and iOS (p=0.0002) show a ~5-8pp conversion lift for higher CES users. Web shows no significant relationship.</li>
+    </ul>
+
+    <h3 style="margin-top: 24px;">What CES does not predict:</h3>
+    <ul>
+        <li><strong>Transfer value</strong> &mdash; no meaningful relationship on mobile. Web shows significance but may be driven by a few high-value outliers.</li>
+        <li><strong>First transfer amount</strong> &mdash; no pattern, which is actually useful: it confirms CES measures verification friction, not user wealth/intent.</li>
+        <li><strong>Time to first transfer</strong> &mdash; counterintuitively, lower-CES users transfer <em>faster</em>, likely reflecting a motivation bias (urgent users push through friction but are unhappy about it).</li>
+    </ul>
+</div>
+
+<table>
+    <thead>
+        <tr><th>Outcome</th><th>Signal?</th><th>Detail</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>Follow-on transfer count</strong></td><td class="sig-yes">Yes ***</td><td>All platforms (p&lt;0.01). Rate ratio 1.079.</td></tr>
+        <tr><td><strong>Conversion (mobile)</strong></td><td class="sig-yes">Yes **</td><td>Android & iOS ~5-8pp lift. Web ns.</td></tr>
+        <tr><td>Transfer value</td><td class="sig-no">No</td><td>No mobile relationship. Web = outliers.</td></tr>
+        <tr><td>First transfer amount</td><td class="sig-no">No</td><td>CES measures friction, not wealth.</td></tr>
+        <tr><td>Time to first transfer</td><td class="sig-rev">Reversed</td><td>Low CES &rarr; faster transfer (motivation bias).</td></tr>
+    </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Survey Responses & CES Score Over Time</h2>
+
+<div class="chart-container">
+    <img src="Visualisations/responses_and_avg_ces_by_month.png" alt="Survey responses and average CES score by month, split by platform">
+    <div class="caption">Monthly survey response volume (bars) and average CES score (line) across Android, iOS, and Web.</div>
+</div>
+
+<div class="chart-container">
+    <img src="Visualisations/responses_by_country_and_platform.png" alt="Survey responses by country and platform">
+    <div class="caption">Response volume by registration country and platform. Only countries with 50+ responses shown.</div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Conversion to First Transfer</h2>
+
+<p>Does a higher CES score predict whether a user makes their first transfer after verification?</p>
+
+<div class="chart-container">
+    <img src="Visualisations/conversion_rate_by_ces_score.png" alt="Conversion rate by CES score across platforms">
+    <div class="caption">Conversion rate (% making at least one transfer) by CES score (1&ndash;7), split by platform.</div>
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>CES score is significantly associated with conversion on <strong>Android (p=0.0005)</strong> and <strong>iOS (p=0.0002)</strong>, but not on Web (p=0.052). The effect is modest &mdash; conversion ranges from ~50% (low CES) to ~60% (high CES) on mobile, while Web is flat at ~35-40% regardless of score.</p>
+</div>
+
+<div class="chart-container">
+    <img src="Visualisations/conversion_rate_top3_box.png" alt="Conversion rate by top-3-box grouping">
+    <div class="caption">Conversion rate grouped into Top-3-Box (CES &ge; 5) vs Bottom-Box (CES &le; 4), by platform.</div>
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>The top-3-box grouping sharpens the mobile finding &mdash; <strong>Android (p&lt;0.0001)</strong> and <strong>iOS (p=0.005)</strong> show significantly higher conversion for top-3-box vs bottom-box users. Web remains non-significant (p=0.93).</p>
+    <p>The absolute difference is still small (~5-8pp on mobile). That the signal is strengthened with this grouping suggests that reducing scale granularity would lead to better measurement ability.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>Time to First Transfer</h2>
+
+<div class="chart-container">
+    <img src="Visualisations/time_to_first_transfer_by_ces.png" alt="Time to first transfer by CES score">
+    <div class="caption">Mean (bars) and median (markers) days to first transfer by CES score, per platform.</div>
+</div>
+
+<div class="insight caveat">
+    <div class="label">Counterintuitive finding</div>
+    <p>Lower CES users tend to transfer <em>faster</em>, the opposite of what we'd expect. This likely reflects a <strong>motivation bias</strong>: users with high urgency to send money pushed through a frustrating verification experience (hence low CES), but their strong intent meant they transferred quickly anyway.</p>
+    <p>The speed of first transfer may be a proxy for pre-existing urgency rather than a consequence of verification ease. The large mean/median gap also indicates heavy right-skew driven by a few slow converters.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>First Transfer Amount</h2>
+
+<div class="chart-container">
+    <img src="Visualisations/first_transfer_amount_by_ces.png" alt="First transfer amount by CES score">
+    <div class="caption">Distribution of first transfer amount (GBP) by CES score, per platform. Outliers hidden.</div>
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>First transfer amounts are similar across CES scores &mdash; no meaningful pattern. This suggests that CES captures friction in the verification process, <strong>not</strong> differences in user wealth or intent to send a particular amount.</p>
+</div>
+
+<!-- ============================================================ -->
+<div class="section-divider">
+    <h2>Follow-On Transfer Behavior</h2>
+    <p>The strongest and most actionable signals in the data</p>
+</div>
+
+<h3>Follow-On Transfer Value</h3>
+
+<div class="chart-container">
+    <img src="Visualisations/followon_transfer_value_by_ces.png" alt="Follow-on transfer value by CES score">
+    <div class="caption">Follow-on transfer value (total spend minus first transfer) by CES score, per platform.</div>
+</div>
+
+<div class="chart-container">
+    <img src="Visualisations/followon_transfer_value_top3_box.png" alt="Follow-on transfer value by top-3-box grouping">
+    <div class="caption">Follow-on transfer value grouped into Top-3-Box vs Bottom-Box, per platform.</div>
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>Follow-on transfer value does not differ significantly by CES score on mobile (Android p=0.53, iOS p=0.07). Only Web shows a significant difference (p&lt;0.0001). Transfer value is heavily skewed by a few high-value senders &mdash; the Web signal may be driven by a small number of power users rather than a broad behavioral pattern.</p>
+</div>
+
+<!-- ============================================================ -->
+
+<h3>Follow-On Transfer Count</h3>
+
+<div class="chart-container">
+    <img src="Visualisations/followon_transfer_count_by_ces.png" alt="Follow-on transfer count by CES score">
+    <div class="caption">Follow-on transfer count (total transfers minus 1) by CES score, per platform.</div>
+</div>
+
+<div class="chart-container">
+    <img src="Visualisations/followon_transfer_count_top3_box.png" alt="Follow-on transfer count by top-3-box grouping">
+    <div class="caption">Follow-on transfer count grouped into Top-3-Box vs Bottom-Box, per platform.</div>
+</div>
+
+<div class="insight">
+    <div class="label">Strongest signal</div>
+    <p>Follow-on transfer <strong>count</strong> is the strongest behavioral signal for CES. It's significant across all platforms (Android p=0.002, iOS p=0.008, Web p&lt;0.0001). Higher CES users make more repeat transfers. The top/bottom box grouping confirms this (all platforms p&lt;0.05).</p>
+    <p>This is the most actionable finding, but causality is unclear &mdash; users with stronger underlying intent to use Wise may both rate the experience higher and transact more frequently.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>Regression Analysis</h2>
+
+<h3>Negative Binomial Regression: Follow-On Transfer Count</h3>
+
+<p>Predicting follow-on transfer count from CES score, controlling for platform (reference=Android) and registration country (countries with &ge;30 respondents).</p>
+
+<div class="model-output">
+<span class="key">CES_SCORE                coef = 0.0758    p &lt; 0.0001  ***</span>
+PLATFORM[T.IOS]          coef = 0.0457    p = 0.347   ns
+PLATFORM[T.WEB]          coef = -0.8021   p &lt; 0.0001  ***
+alpha (overdispersion)   = 2.6999
+
+<span class="key">CES_SCORE rate ratio: 1.079</span>  &rarr;  Each +1 CES point = 7.9% more follow-on transfers
+CES_SCORE p-value: &lt; 0.0001
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>After controlling for platform and country, CES score remains a significant predictor of follow-on transfer count (p&lt;0.0001). Each 1-point CES increase is associated with <strong>7.9% more follow-on transfers</strong> (rate ratio=1.079). Web users make significantly fewer follow-on transfers than Android (coef=-0.80), while iOS is not significantly different from Android.</p>
+</div>
+
+<h3>Logistic Regression: Conversion</h3>
+
+<p>Predicting whether a user converts to their first transfer, controlling for platform and country.</p>
+
+<div class="model-output">
+<span class="key">CES_SCORE                coef = 0.0255    p &lt; 0.0001  ***</span>
+PLATFORM[T.IOS]          coef = -0.3644   p &lt; 0.0001  ***
+PLATFORM[T.WEB]          coef = -0.7796   p &lt; 0.0001  ***
+
+<span class="key">CES_SCORE odds ratio: 1.026</span>  &rarr;  Each +1 CES point = 2.6% higher odds of conversion
+CES_SCORE p-value: &lt; 0.0001
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>CES also predicts conversion (p&lt;0.0001), but the effect is weaker: odds ratio of 1.026 (~2.6% increase per CES point). The transfer count model tells a much stronger story than the conversion model.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>Important Caveats</h2>
+
+<ol>
+    <li><strong>Convenience-based data analysis.</strong> The survey was not designed with this measurement framework in mind, meaning we should not expect strong signal.</li>
+    <li><strong>Causality is not established.</strong> Users with inherently stronger intent to use Wise may both rate the experience higher and transact more. This analysis shows association, not that improving CES <em>causes</em> more transfers.</li>
+    <li><strong>Survivorship bias.</strong> Users who rage-quit during verification never took the survey &mdash; the worst-experience users are missing from the data entirely.</li>
+    <li><strong>Perception-based measurement.</strong> User motivations and mental models add noise to the CES signal. This data wasn't designed for this kind of longitudinal analysis; properly designed measurement systems would mitigate these issues.</li>
+    <li><strong>Top-3-box grouping</strong> strengthens signals on mobile, suggesting the 7-point scale may have more granularity than the underlying construct warrants.</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>Implications & Next Steps</h2>
+
+<ul>
+    <li><strong>Economic signal exists:</strong> There is evidence of a downstream economic benefit to Wise from improving verification experiences (more repeat transactions).</li>
+    <li><strong>Experimentation needed:</strong> Properly designed A/B tests and measurement systems with more data would be needed to quantify the true effect and isolate its drivers.</li>
+    <li><strong>Measurement redesign:</strong> Consider reducing scale granularity for cleaner signal. Design surveys explicitly for longitudinal behavioral tracking.</li>
+    <li><strong>Platform-specific investment:</strong> Mobile shows the clearest signal for conversion uplift. Web's relationship is weaker and may require separate investigation.</li>
+</ul>
+
+</div>
+</main>
+
+</body>
+</html>
