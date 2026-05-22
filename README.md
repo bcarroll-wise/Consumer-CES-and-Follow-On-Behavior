@@ -25,9 +25,10 @@ After controlling for country and platform, each 1-point CES increase is associa
 
 ## Important caveats
 
-1. **Causality is not established.** Users with inherently stronger intent may both rate higher and transact more.
-2. **Survivorship bias.** Users who rage-quit during verification never took the survey — the worst-experience users are missing entirely.
-3. **Perception-based measurement.** User motivations and mental models add noise. Properly designed measurement systems would mitigate these issues.
+1. **Convenience based data analysis.** Survey was not designed with this measurement framework in mind, meaning we should not expect strong signal (see additional caveat below). 
+2. **Causality is not established.** Users with inherently stronger intent may both rate higher and transact more.
+3. **Survivorship bias.** Users who rage-quit during verification never took the survey — the worst-experience users are missing entirely.
+4. **Perception-based measurement.** User motivations and mental models add noise. Properly designed measurement systems would mitigate these issues.
 
 ## Implication
 
