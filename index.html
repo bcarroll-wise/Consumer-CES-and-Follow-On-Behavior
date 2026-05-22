@@ -334,6 +334,12 @@
 <main>
 <div class="container">
 
+<h2>Context</h2>
+
+<p>I leveraged historical data from the CES survey at verification flow drop off and readily available transaction data as a proof of concept and conversation starter, to understand if there was the possibility of detecting downstream economic impact from measuring user perception (in this case perceived effort &mdash; which could mean friction, but might not. More on that later).</p>
+
+<p>This analysis isn't causal, and there are a lot of other variables that would be useful as inputs to make a true conclusion. The purpose of this study was to start the conversation (and teach me about Wise's data landscape). I wanted to answer the question &mdash; is this a thread worth pulling. The data show the answer is <strong>yes</strong>, and I hope this work can kick off conversations and a more in depth workstream to close some of the gaps implicit in this analysis.</p>
+
 <h2>Summary of Findings</h2>
 
 <div class="stat-banner">
@@ -351,7 +357,9 @@
     </div>
 </div>
 
-<p><strong>Key finding:</strong> CES score from the personal verification flow is a statistically significant predictor of follow-on transfer frequency across all platforms. After controlling for country and platform, each 1-point CES increase is associated with <span class="highlight">7.9% more follow-on transfers</span> (negative binomial regression, p&lt;0.0001).</p>
+<p><strong>Key finding:</strong> CES score from the personal verification flow is a statistically significant predictor of follow-on transfer frequency across all platforms. After controlling for country and platform, each 1-point CES increase is <strong>associated*</strong> with <span class="highlight">7.9% more follow-on transfers</span> (negative binomial regression, p&lt;0.0001). This is the strongest and most consistent behavioral signal in the data.</p>
+
+<p><em>*Important note &mdash; <strong>correlation != causation!</strong> While this is a great signal, there are many caveats and unknowns and we shouldn't start going on an 8% transaction increase from driving CES improvements (...yet).</em></p>
 
 <div class="findings-box">
     <h3>What CES predicts well:</h3>
@@ -364,7 +372,7 @@
     <ul>
         <li><strong>Transfer value</strong> &mdash; no meaningful relationship on mobile. Web shows significance but may be driven by a few high-value outliers.</li>
         <li><strong>First transfer amount</strong> &mdash; no pattern, which is actually useful: it confirms CES measures verification friction, not user wealth/intent.</li>
-        <li><strong>Time to first transfer</strong> &mdash; counterintuitively, lower-CES users transfer <em>faster</em>, likely reflecting a motivation bias (urgent users push through friction but are unhappy about it).</li>
+        <li><strong>Time to first transfer</strong> &mdash; counterintuitively, lower-CES users transfer <em>faster</em>. Multiple explanations are plausible (urgency bias, review delays, selection). However, an interaction test confirms this does NOT moderate the repeat-transfer finding &mdash; the CES effect is consistent across fast and slow converters.</li>
     </ul>
 </div>
 
@@ -392,6 +400,12 @@
 <div class="chart-container">
     <img src="Visualisations/responses_by_country_and_platform.png" alt="Survey responses by country and platform">
     <div class="caption">Response volume by registration country and platform. Only countries with 50+ responses shown.</div>
+</div>
+
+<div class="insight caveat">
+    <div class="label">Data note</div>
+    <p>The chart shows countries with responses &gt;50 to make the visualisation cleaner. There are ~200 responses in the data across a wide array of other countries.</p>
+    <p>The data was cleaned to remove instances where a user responded to the survey more than once (keeping only their first response). This removed &lt;1% of responses.</p>
 </div>
 
 <!-- ============================================================ -->
@@ -430,8 +444,43 @@
 
 <div class="insight caveat">
     <div class="label">Counterintuitive finding</div>
-    <p>Lower CES users tend to transfer <em>faster</em>, the opposite of what we'd expect. This likely reflects a <strong>motivation bias</strong>: users with high urgency to send money pushed through a frustrating verification experience (hence low CES), but their strong intent meant they transferred quickly anyway.</p>
-    <p>The speed of first transfer may be a proxy for pre-existing urgency rather than a consequence of verification ease. The large mean/median gap also indicates heavy right-skew driven by a few slow converters.</p>
+    <p>Lower CES users tend to transfer <em>faster</em>, the opposite of what we'd expect. Multiple explanations are plausible and we cannot distinguish between them with this data:</p>
+    <ol>
+        <li><strong>Motivation bias:</strong> Users with high urgency pushed through a frustrating experience (hence low CES) but their strong intent meant they transferred quickly anyway.</li>
+        <li><strong>Process-driven:</strong> Slow manual reviews cause both low CES (frustration with wait) and fast first transfer (pent-up intent releases immediately on approval).</li>
+        <li><strong>Selection:</strong> The fastest converters may have simpler verification paths that still feel effortful on mobile.</li>
+    </ol>
+    <p>The large mean/median gap indicates heavy right-skew driven by a few slow converters. This ambiguity demonstrates the difficulty in using a perception-based metric without process instrumentation to disambiguate.</p>
+</div>
+
+<!-- ============================================================ -->
+<h3>Interaction Test: CES &times; Conversion Speed</h3>
+
+<p>Does the CES effect only hold for slow converters? If so, the pooled finding might be masking two separate populations.</p>
+
+<div class="model-output">
+<span class="key">INTERACTION TEST: CES × Conversion Speed → Follow-on Transfers</span>
+
+Median time to first transfer: 3.5 days
+Fast converters (≤ median): n=5,105, mean CES=5.36
+Slow converters (> median): n=5,104, mean CES=5.70
+
+<span class="key">Interaction term (CES_SCORE:fast_converter): p=0.9088  ns</span>
+
+Stratified results:
+  Fast (≤ median):  RR=1.065 (+6.5% per CES point), p&lt;0.0001 ***
+  Slow (> median):  RR=1.077 (+7.7% per CES point), p&lt;0.0001 ***
+
+Tertile split:
+  Fast  [0-1d]:    RR=1.067 (+6.7%), p=0.0002 ***
+  Medium [1-10d]:  RR=1.079 (+7.9%), p&lt;0.0001 ***
+  Slow  [10-154d]: RR=1.077 (+7.7%), p&lt;0.0001 ***
+</div>
+
+<div class="insight">
+    <div class="label">Insight</div>
+    <p>The interaction between CES and conversion speed is non-significant (p=0.91). The CES &rarr; repeat transfer relationship is consistent across fast converters (+6.5% per point), medium converters (+7.9%), and slow converters (+7.7%). These are <strong>not</strong> two separate populations &mdash; the pooled 7.9% effect is robust regardless of how quickly users made their first transfer.</p>
+    <p>The timing paradox (lower CES &rarr; faster first transfer) and the frequency finding (higher CES &rarr; more repeat transfers) are operating on different dimensions. Whatever explains the speed pattern does not moderate the CES&ndash;retention relationship.</p>
 </div>
 
 <!-- ============================================================ -->
